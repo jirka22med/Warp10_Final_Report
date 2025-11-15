@@ -97,11 +97,33 @@ Warp10_Final_Report/
 - **Datum instalace:** 14. listopadu 2025
 - **Datum ladění:** 15. listopadu 2025
 
+### 🔧 Důvod půl-reinstalace Windows
+
+Původní systém Windows 11 25H2 x64 trpěl kritickými problémy:
+
+- **Poškozené systémové knihovny** a další podfunkce
+- **Kernel-Power ID 41 chyba** – systém se nečekaně restartoval bez předchozího vypnutí
+- Citace z Event Logu: *"Systém se nečekaně restartoval bez žádného vypnutí"*
+
+Z tohoto důvodu byla provedena **In-Place Upgrade** instalace, která opravila poškozené systémové soubory při zachování všech uživatelských dat a aplikací.
+
+### 🎮 Reinstalace grafického ovladače
+
+Po dokončení reinstalace Windows byl proveden i **čistý restart grafického ovladače**:
+
+1. **Display Driver Uninstaller (DDU)** spuštěn v nouzovém režimu
+2. Kompletní odinstalace ovladače NVIDIA (včetně všech zbytků)
+3. Čistá instalace **NVIDIA Game Ready Driver** (nejnovější verze)
+4. Výsledek: stabilní grafický výkon bez konfliktů starých ovladačů
+
+> 💡 **Tip:** Více informací o testování stability a výkonu najdeš v interaktivním HTML reportu (`index.html`)
+
 ### Použité nástroje
 - PowerShell
 - Registry Editor
 - Device Manager
 - MSConfig
+- Display Driver Uninstaller (DDU)
 - Custom scripts pro backup a restore
 
 ### Modifikované oblasti

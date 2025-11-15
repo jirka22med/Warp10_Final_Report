@@ -1,0 +1,140 @@
+<!DOCTYPE html> 
+<html lang="cs"> 
+<head> 
+  <meta charset="UTF-8" /> 
+  <title>Warp 10 – Finální report systému</title> 
+  <style> 
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #050814; color: #e7ecff; margin: 0; padding: 20px; } 
+    .wrap { max-width: 1100px; margin: 0 auto; background: #0b1020; border-radius: 14px; padding: 20px 24px 28px; box-shadow: 0 18px 45px rgba(0,0,0,0.7); } 
+    h1 { text-transform: uppercase; letter-spacing: 0.12em; font-size: 20px; margin-bottom: 4px; } 
+    h2 { margin-top: 24px; font-size: 17px; letter-spacing: 0.06em; text-transform: uppercase; } 
+    h3 { margin-top: 14px; font-size: 14px; text-transform: uppercase; letter-spacing: 0.06em; color: #a7b4ff; } 
+    .subtitle { color: #9aa0c5; font-size: 13px; margin-bottom: 14px; } 
+    .badge { display: inline-block; padding: 4px 10px; border-radius: 999px; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; border: 1px solid rgba(70,194,255,0.6); color: #bde7ff; background: rgba(5,15,40,0.9); margin-bottom: 10px; } 
+    .section { margin-top: 16px; padding: 12px 12px 10px; border-radius: 10px; border: 1px solid #252b45; background: radial-gradient(circle at top left, rgba(70,194,255,0.06), #070b18); } 
+    .section-strong { border-color: #3f8bff; } 
+    .section-ok { border-color: #38d996; } 
+    .section-text { font-size: 13px; color: #b2bbde; } 
+    ul { margin: 6px 0 4px 18px; padding: 0; font-size: 13px; color: #b2bbde; } 
+    li { margin-bottom: 3px; } 
+    .kv { display: grid; grid-template-columns: 160px 1fr; gap: 4px 10px; margin-top: 6px; font-size: 13px; } 
+    .kv-label { color: #8f96c0; } 
+    .kv-value { color: #e7ecff; } 
+    .footer { margin-top: 22px; font-size: 11px; color: #747ba5; text-align: center; } 
+    code { font-family: Consolas, "JetBrains Mono", monospace; font-size: 12px; background: rgba(8,12,30,0.95); padding: 2px 5px; border-radius: 4px; border: 1px solid #273055; } 
+  </style> 
+</head> 
+<body> 
+<div class="wrap"> 
+  <span class="badge">WARP 10 PERFORMANCE PROTOKOL</span> 
+  <h1>Finální report systému Windows</h1> 
+  <div class="subtitle">Více admirál Jiřík – ladění výkonu po půl-reinstalaci (In-Place Upgrade) a kompletním tuningu registrů, napájení a grafiky.</div> 
+  <div class="section section-strong"> 
+    <h2>Základní informace o misi</h2> 
+    <div class="kv"> 
+      <div class="kv-label">Stav systému:</div><div class="kv-value">Stabilní, po úspěšné půl-reinstalaci (Win11 25H2)</div> 
+      <div class="kv-label">Cíl protokolu:</div><div class="kv-value">Maximální výkon a minimální latence (Warp 10)</div> 
+      <div class="kv-label">Datum ladění:</div><div class="kv-value">14. - 15. 11. 2025</div> 
+      <div class="kv-label">Zásah do dat:</div><div class="kv-value">Žádná ztráta uživatelských souborů, změny jen v konfiguraci</div> 
+    </div> 
+  </div> 
+  <div class="section"> 
+    <h2>1. Napájení a CPU plán (Power Plan)</h2> 
+    <div class="section-text"> 
+      Aktivován byl plán napájení zaměřený na maximální výkon. Nastavení byla přizpůsobena tak, aby se jádra procesoru neuspávala a nedocházelo k agresivním úsporným režimům během zátěže. 
+      <ul> 
+        <li>Povoleno trvalé využití všech jader CPU.</li> 
+        <li>Vypnuto agresivní škrcení frekvence v idle i při lehké zátěži.</li> 
+        <li>Plán připraven pro dlouhodobý stabilní provoz (hry, tvorba, stream).</li> 
+      </ul> 
+    </div> 
+  </div> 
+  <div class="section"> 
+    <h2>2. Power Throttling a AoAc (skrytá omezení výkonu)</h2> 
+    <div class="section-text"> 
+      Windows obsahuje mechanizmy, které v pozadí omezují výkon kvůli úspoře energie. Tyto limity byly vypnuty, aby nedocházelo k nečekanému škrcení výkonu během hraní nebo práce: 
+      <ul> 
+        <li>Deaktivováno obecné throttlování procesů na pozadí.</li> 
+        <li>Vynucen klasický režim napájení místo moderních tabletových režimů.</li> 
+        <li>Cíl: stabilní takt CPU a spolehlivá odezva i v kombinaci s dGPU + iGPU.</li> 
+      </ul> 
+    </div> 
+  </div> 
+  <div class="section"> 
+    <h2>3. DWM a MPO (grafický kompozitor a overlay vrstvy)</h2> 
+    <div class="section-text"> 
+      Nastavení grafického kompozitoru (DWM) byla upravena kvůli stabilnějším frametimes. MPO (Multiplane Overlay) může v některých kombinacích GPU + ovladač způsobovat trhání, blikání nebo zvláštní chování oken. 
+      <ul> 
+        <li>MPO bylo vypnuto pro minimalizaci tearingu a microstutteru.</li> 
+        <li>Výsledek: plynulejší vykreslování v okně i borderless fullscreen režimu.</li> 
+      </ul> 
+    </div> 
+  </div> 
+  <div class="section section-ok"> 
+    <h2>4. Multimedia SystemProfile a síťová omezení</h2> 
+    <div class="section-text"> 
+      Systémový profil pro multimédia byl přenastaven tak, aby Windows neomezoval multimediální a herní úlohy. 
+      <ul> 
+        <li>SystemResponsiveness nastaven na 0 – multimediální úlohy mají plnou prioritu.</li> 
+        <li>NetworkThrottlingIndex nastaven na maximum – zrušení umělého škrcení toku dat.</li> 
+        <li>Priorita GPU i CPU zvýšena pro real-time úlohy (hry, zvuk, video, streaming).</li> 
+      </ul> 
+    </div> 
+  </div> 
+  <div class="section"> 
+    <h2>5. Tasks: System a Games (plánování úloh)</h2> 
+    <div class="section-text"> 
+      Byly upraveny dvě klíčové kategorie: <strong>System</strong> a <strong>Games</strong>, které říkají plánovači, jak se má chovat k určitým typům zátěže. 
+      <h3>System</h3> 
+      <ul> 
+        <li>Vyšší plánovací kategorie – důležité systémové úlohy mají přednost.</li> 
+        <li>Zvýšená priorita pro úlohy, které ovlivňují odezvu systému.</li> 
+      </ul> 
+      <h3>Games</h3> 
+      <ul> 
+        <li>Maximální priorita pro herní thread.</li> 
+        <li>Využití všech dostupných jader (Affinity = 0).</li> 
+        <li>Zvýšená priorita pro GPU úlohy – méně dropů FPS a stabilnější frametimes.</li> 
+      </ul> 
+    </div> 
+  </div> 
+  <div class="section"> 
+    <h2>6. Game Mode a herní prostředí</h2> 
+    <div class="section-text"> 
+      Herní režim systému Windows byl zapnut a správně nakonfigurován tak, aby během hraní: 
+      <ul> 
+        <li>Windows omezil rušivé úlohy na pozadí.</li> 
+        <li>Byla preferována hra před méně důležitými procesy.</li> 
+        <li>Zůstala zachována stabilita systému a funkčnost ochrany (Defender, bezpečnostní služby).</li> 
+      </ul> 
+    </div> 
+  </div> 
+  <div class="section"> 
+    <h2>7. Síť a rozhraní TCP/IP</h2> 
+    <div class="section-text"> 
+      Úpravy síťových parametrů byly zaměřeny na minimalizaci zpoždění a zabránění zbytečnému omezování rychlosti: 
+      <ul> 
+        <li>Připraveno pro online hraní, streamování a VoIP.</li> 
+      </ul> 
+    </div> 
+  </div> 
+  <div class="section section-ok"> 
+    <h2>8. Shrnutí výsledného stavu (Warp 10)</h2> 
+    <div class="section-text"> 
+      Celkový výsledek ladění: 
+      <ul> 
+        <li>Stabilní frametimes a rychlá odezva systému.</li> 
+        <li>Žádné skryté úsporné režimy, které by škrtaly výkon v zátěži.</li> 
+        <li>Optimalizováno pro hry, tvorbu obsahu, nahrávání i streaming.</li> 
+        <li>Konfigurace je zálohovatelná a obnovitelná přes WARP10 backup balíček.</li> 
+      </ul> 
+      Tento report slouží jako dokumentace stavu po kompletní misi ladění systému. 
+    </div> 
+  </div> 
+  <div class="footer"> 
+    Vytvořeno pro více admirála Jiříka jako součást Warp 10 protokolu. <br /> 
+    Tento HTML report můžeš archivovat, tisknout nebo sdílet jako finální dokumentaci systému. 
+  </div> 
+</div> 
+</body> 
+</html> 
